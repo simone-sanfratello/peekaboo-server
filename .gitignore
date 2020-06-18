@@ -1,0 +1,31 @@
+/cache
+/test/cache
+
+# Don't check auto-generated stuff into git
+/coverage
+/build
+/test/output
+
+node_modules
+npm-debug.log
+package-lock.json
+
+.DS_Store
+.idea
+.vagrant
+.vscode
+.nyc*
+
+# Logs
+logs
+*.log
+
+# Distribution
+dist
+
+# Runtime data
+.cache
+pids
+*.pid
+*.seed
+*.pid.lock

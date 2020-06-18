@@ -1,0 +1,59 @@
+{
+  "name": "peekaboo-server",
+  "version": "0.0.1-dev",
+  "description": "Reverse proxy for test doubles",
+  "engines": {
+    "node": ">=12"
+  },
+  "standard": {
+    "globals": [
+      "describe",
+      "test",
+      "expect",
+      "beforeAll",
+      "afterAll",
+      "beforeEach"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "get-port": "^5.1.1",
+    "got": "^11.2.0",
+    "husky": "^4.2.5",
+    "jest": "^26.0.1",
+    "node-fetch": "^2.6.0",
+    "rimraf": "^3.0.2",
+    "standard": "^14.3.4",
+    "standard-version": "^8.0.0",
+    "uuid": "^8.1.0"
+  },
+  "dependencies": {
+    "fastify": "^2.14.1",
+    "fastify-cors": "^3.0.3",
+    "fastify-formbody": "^3.2.0",
+    "fastify-peekaboo": "^1.2.4-beta",
+    "fastify-static": "^2.7.0",
+    "fastify-websocket": "^1.1.2",
+    "peppino": "^0.1.1-alpha",
+    "pino": "^6.3.2",
+    "pino-pretty": "^4.0.0",
+    "request-as-curl": "^0.1.0",
+    "superstruct": "^0.8.3",
+    "yargs": "^15.3.1"
+  },
+  "scripts": {
+    "start": "bin/peekaboo-server.js",
+    "start-dev": "node dev/server.js",
+    "start-dev:watch": "nodemon dev/server.js --ignore src/ui",
+    "test": "jest",
+    "test-coverage": "jest --coverage",
+    "build": "cd src/ui; npm run build",
+    "release": "standard-version"
+  }
+}
