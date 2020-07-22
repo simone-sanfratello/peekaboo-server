@@ -57,7 +57,7 @@ const http = {
    * @todo settings fix body = function({request: forward, response: target})
    */
   adjustResponseBody: function (target, request) {
-    if (request.headers['content-type'] && request.headers['content-type'].includes('application/json') && typeof target.body === 'string') {
+    if (target.headers['content-type'] && target.headers['content-type'].includes('application/json') && typeof target.body === 'string') {
       if (!target.body) {
         return {}
       } else if (typeof target.body === 'string') {

@@ -18,4 +18,12 @@ async function main () {
   }
 }
 
+process
+  .on('unhandledRejection', (error, promise) => {
+    log.error({ message: 'unhandledRejection', error, promise })
+  })
+  .on('uncaughtException', (error) => {
+    log.error({ message: 'uncaughtException', error })
+  })
+
 main()

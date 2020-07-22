@@ -7,6 +7,8 @@ Batteries included.
 
 # WORK IN PROGRESS
 
+@todo screenshot
+
 ## Quick start
 
 ```bash
@@ -14,16 +16,15 @@ npm i -g peekaboo-server
 peekaboo-server
 ```
 
-or with docker
+or
 
 ```bash
 docker run braces/peekaboo-server:latest @todo
 ```
 
-then the cache server is ready
-
 ```bash
-curl ... @todo
+curl @todo request first time 
+curl @todo request with cache
 ```
 
 ## UI
@@ -32,26 +33,36 @@ When server is running, it provide its ui interface at `/`
 
 @todo screenshot
 
-## Settings
+## How it works
 
 @todo
 
-use custom settings for my-app.js
+Running with https can also allow to use `peekaboo-server` with mobile applications.
+
+## Settings
+
+### default settings
+
+@todo
+
+### custom settings for my-app.js
 
 ```bash
-peekaboo-server --settings my-app.js
+peekaboo-server --settings stub-my-app.js
 ```
 
-load custom settings from my-app.js and override at runtime
+custom settings from my-app.js and override at runtime with env vars
 
 ```bash
 APP_PORT=9123 LOG_LEVEL=debug peekaboo-server --settings my-app.js
 ```
 
-APP_PORT default 8080
-LOG_LEVEL default warn
-LOG_PRETTY default false
-RELAY_TIMEOUT default 20000
+available env vars
+
+- **APP_PORT**, default `8080`
+- **LOG_LEVEL**, default `warn`
+- **LOG_PRETTY**, default `false`
+- **RELAY_TIMEOUT**, default `20000`
 
 ## https
 
@@ -59,18 +70,28 @@ RELAY_TIMEOUT default 20000
 
 ## Development
 
-for server
+server
 
 ```bash
 npm start
 ```
 
-for ui
+ui
 
 ```bash
 cd src/ui
 npm run serve
 ```
+
+build
+
+```bash
+npm run build
+```
+
+## Contribution
+
+Any contribution is welcome! You can propose a PR or open an issue and explain what you are going to do.  
 
 ---
 

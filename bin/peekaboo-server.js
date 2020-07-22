@@ -9,6 +9,14 @@ const server = require('../src/lib/server')
 const event = require('../src/lib/event')
 const ui = require('../src/lib/ui')
 
+process
+  .on('unhandledRejection', (error, promise) => {
+    log.error({ message: 'unhandledRejection', error, promise })
+  })
+  .on('uncaughtException', (error) => {
+    log.error({ message: 'uncaughtException', error })
+  })
+  
 async function main () {
   let settings
   try {

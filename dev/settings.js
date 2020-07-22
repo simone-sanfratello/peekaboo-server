@@ -30,8 +30,8 @@ module.exports = function (settings) {
     if (response.statusCode === 401 && !request.raw.originalUrl.indexOf('login')) {
       response.statusCode = 403
     } else if (response.statusCode > 399 && response.statusCode !== 403) {
-      // response.statusCode = 209
-      // response.body = ''
+      response.statusCode = 209
+      response.body = ''
     }
   }
 
