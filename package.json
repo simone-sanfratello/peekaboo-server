@@ -44,7 +44,7 @@
     "pino": "^6.6.1",
     "pino-pretty": "^4.2.1",
     "request-as-curl": "^0.1.0",
-    "superstruct": "^0.8.3",
+    "superstruct": "0.8.3",
     "yargs": "^16.0.3"
   },
   "scripts": {
