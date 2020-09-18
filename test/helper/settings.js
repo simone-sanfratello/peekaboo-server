@@ -30,7 +30,7 @@ module.exports = function (settings) {
     response.headers.vary = 'Accept-Encoding'
 
     // @todo on error
-    if (response.statusCode === 401 && !request.raw.originalUrl.indexOf('login')) {
+    if (response.statusCode === 401 && !request.raw.url.includes('login')) {
       response.statusCode = 403
     } else if (response.statusCode > 399 && response.statusCode !== 403) {
       // response.statusCode = 209
