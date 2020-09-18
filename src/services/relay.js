@@ -29,7 +29,7 @@ const relay = function (fastify, settings) {
         ...options,
         url,
         query: request.query,
-        method: request.req.method,
+        method: request.method,
         headers: http.adjustRequestHeaders(request.headers)
       }
 
@@ -80,7 +80,7 @@ const relay = function (fastify, settings) {
   })
 
   fastify.addHook('onRequest', async (request, response) => {
-    if (request.raw.originalUrl.indexOf('/url/') !== 0) {
+    if (request.raw.url.indexOf('/url/') !== 0) {
       return
     }
     request.relay = {
@@ -93,16 +93,16 @@ const relay = function (fastify, settings) {
         summary: {
           id: request.id,
           url: request.params['*'],
-          method: request.req.method,
+          method: request.method,
           query: request.query
         },
         request: {
           url: request.params['*'],
-          method: request.req.method,
+          method: request.method,
           query: request.query,
           headers: http.adjustRequestHeaders(request.headers),
           body: JSON.stringify(request.body),
-          curl: curl(request.req)
+          curl: curl(request.raw)
         }
       })
       await fs.writeFile(path.join(settings.history.path, request.id), content, 'utf8')
@@ -146,7 +146,7 @@ const relay = function (fastify, settings) {
         summary: {
           id: request.id,
           url: request.params['*'],
-          method: request.req.method,
+          method: request.method,
           query: request.query,
           size: request.relay.payload.length,
           time,
@@ -155,11 +155,11 @@ const relay = function (fastify, settings) {
         },
         request: {
           url: request.params['*'],
-          method: request.req.method,
+          method: request.method,
           query: request.query,
           headers: http.adjustRequestHeaders(request.headers),
           body: JSON.stringify(request.body), // @todo different payload types (binary, stream ...)
-          curl: curl(request.req)
+          curl: curl(request.raw)
         },
         response: {
           status: response.statusCode,
@@ -176,7 +176,7 @@ const relay = function (fastify, settings) {
     event.emit('relay:response', {
       id: request.id,
       url: request.params['*'],
-      method: request.req.method,
+      method: request.method,
       query: request.query,
       size: request.relay.payload.length,
       time,

@@ -1,6 +1,6 @@
 # peekaboo-server
 
-:ghost: `peekaboo-server` is a reverse proxy for test doubles, for easily stub whole the backend.  
+:ghost: `peekaboo-server` is a reverse proxy for test doubles, for easily stub backend http/s calls, agnostically to its architecture.  
 
 Inspired by [polly.js](https://netflix.github.io/pollyjs), [anyproxy](https://anyproxy.io/), [mitmproxy](https://mitmproxy.org/), [mockserver](https://www.mock-server.com/), [wiremock](http://wiremock.org/), [lightproxy](https://github.com/alibaba/lightproxy), Google Chrome DevTools Network panel and maybe more.  
 Batteries included.
