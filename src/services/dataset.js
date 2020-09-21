@@ -5,21 +5,22 @@
  */
 const main = function (fastify) {
   fastify.get('/settings/dataset', async (request, response) => {
+    const dataset = await fastify.peekaboo.storage.dataset.get()
     response.send({
-      values: await fastify.peekaboo.get.dataset.entries(),
-      current: await fastify.peekaboo.get.dataset.current()
+      values: dataset.entries,
+      current: dataset.current
     })
   })
   fastify.post('/settings/dataset', async (request, response) => {
     try {
-      response.send(await fastify.peekaboo.set.dataset.create(request.body.name))
+      response.send({ id: await fastify.peekaboo.storage.dataset.create(request.body.name) })
     } catch {
       response.code(400).send('INVALID_DATASET_ENTRY_NAME')
     }
   })
   fastify.patch('/settings/dataset/:id', async (request, response) => {
     try {
-      await fastify.peekaboo.set.dataset.update(request.params.id, request.body.name)
+      await fastify.peekaboo.storage.dataset.update(request.params.id, request.body.name)
       response.send({})
     } catch {
       response.code(400).send('INVALID_DATASET_ENTRY_ID')
@@ -27,7 +28,7 @@ const main = function (fastify) {
   })
   fastify.delete('/settings/dataset/:id', async (request, response) => {
     try {
-      await fastify.peekaboo.set.dataset.remove(request.params.id)
+      await fastify.peekaboo.storage.dataset.remove(request.params.id)
       response.send({})
     } catch {
       response.code(400).send('INVALID_DATASET_ENTRY_ID')
@@ -35,7 +36,7 @@ const main = function (fastify) {
   })
   fastify.post('/settings/dataset/current', async (request, response) => {
     try {
-      await fastify.peekaboo.set.dataset.current(request.body.current)
+      await fastify.peekaboo.storage.dataset.set(request.body.current)
       response.send({})
     } catch {
       response.code(400).send('INVALID_DATASET_ENTRY_ID')
