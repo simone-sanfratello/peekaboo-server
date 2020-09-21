@@ -26,10 +26,11 @@ module.exports = function (settings) {
 
     response.headers.vary = 'Accept-Encoding'
 
-    // @todo on error
-    if (response.statusCode === 401 && !request.raw.url.indexOf('login')) {
-      response.statusCode = 403
+    // mask logout error
+    if (response.statusCode === 401 && !request.raw.url.includes('login') && !request.raw.url.includes('otp')) {
+      response.statusCode = 404
     } else if (response.statusCode > 399 && response.statusCode !== 403) {
+      // mask all error
       response.statusCode = 209
       response.body = ''
     }

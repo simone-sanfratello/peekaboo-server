@@ -6,6 +6,9 @@ const peekaboo = {
     off: 'off',
     collector: 'collector',
     stock: 'stock'
+  },
+  dataset: {
+    default: 1
   }
 }
 

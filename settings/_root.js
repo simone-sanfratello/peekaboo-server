@@ -15,6 +15,7 @@ settings.load = [
   path.join(__dirname, '../src/services/realtime'),
   path.join(__dirname, '../src/services/cache'),
   path.join(__dirname, '../src/services/history'),
+  path.join(__dirname, '../src/services/dataset'),
   path.join(__dirname, '../src/services/settings'),
 
   path.join(__dirname, '../src/plugins/cache')
