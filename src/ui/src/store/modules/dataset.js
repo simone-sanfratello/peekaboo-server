@@ -3,11 +3,11 @@
 const store = require('../../lib/store')
 const server = require('../../lib/server')
 
-const DEFAULT_VALUE = 1
-
 const state = () => ({
-  entries: { status: store.status.SUCCESS, values: [] },
-  current: { status: store.status.SUCCESS, value: null }
+  status: store.status.SUCCESS,
+  entries: {},
+  current: null,
+  default: null
 })
 
 const actions = {
@@ -17,11 +17,11 @@ const actions = {
     const backup = state.entries
     window.fetch(`${server.host}/settings/dataset`, { method: 'GET' })
       .then(response => response.json())
-      .then(data => commit('set', { status: store.status.SUCCESS, entries: data.values, current: data.current }))
+      .then(data => commit('set', { status: store.status.SUCCESS, ...data }))
       .catch(error => commit('set', { ...backup, status: store.status.FAIL, error }))
   },
 
-  create({ commit, state }, name) {
+  create({ commit, state }, { name }) {
     commit('set', { status: store.status.LOADING })
 
     const backup = state.entries
@@ -35,7 +35,7 @@ const actions = {
       .catch(error => commit('set', { ...backup, status: store.status.FAIL, error }))
   },
 
-  update({ commit, state }, id, name) {
+  update({ commit, state }, { id, name }) {
     commit('set', { status: store.status.LOADING })
 
     const backup = state.entries
@@ -49,22 +49,18 @@ const actions = {
       .catch(error => commit('set', { ...backup, status: store.status.FAIL, error }))
   },
 
-  remove({ commit, state }, id) {
-    if (id == DEFAULT_VALUE) {
-      // @todo error message: cant delete default dataset
-      return
-    }
+  remove({ commit, state }, { id }) {
     commit('set', { status: store.status.LOADING })
 
     const backup = state
     window.fetch(`${server.host}/settings/dataset/${id}`, { method: 'DELETE' })
       .then(response => response.json())
-      .then(data => commit('remove', id))
+      .then(data => commit('remove', { id }))
       .catch(error => commit('set', { ...backup, status: store.status.FAIL, error }))
   },
 
   // set current
-  current({ commit, state }, id) {
+  current({ commit, state }, { id }) {
     commit('set', { status: store.status.LOADING })
 
     const backup = state.entries
@@ -80,37 +76,54 @@ const actions = {
 }
 
 const mutations = {
-  set(state, { status, entries, current }) {
+  set(state, { status, entries, current, default: default_ }) {
+    state.status = status
     if (status != store.status.SUCCESS) {
-      state.entries = { ...state.entries, status }
-      state.current = { ...state.current, status }
+      state.entries = { ...state.entries }
+      state.current = state.current
+      state.default = state.default
       return
     }
     if (entries) {
-      state.entries = { status, values: entries }
+      state.entries = { ...entries }
     }
     if (current) {
-      state.current = { status, value: current }
+      state.current = current
+    }
+    if (default_) {
+      state.default = default_
     }
   },
 
   create(state, { id, name }) {
+    state.status = status
     state.entries = {
-      status: store.status.SUCCESS, values: [...entries, { id, name }]
+      ...state.entries,
+      [id]: name
     }
   },
 
   update(state, { id, name }) {
-    const entries = [...state.entries]
-    const replace = entries.findIndex(entry => entry.id == id)
-    entries[replace] = { id, name }
-    state.entries = { status: store.status.SUCCESS, values: entries }
+    const entries = { ...state.entries }
+    entries[id] = name
+    state.entries = entries
   },
 
   remove(state, { id }) {
-    state.entries = { status: store.status.SUCCESS, values: entries.splice(entries.findIndex(entry => entry.id == id), 1) }
+    const entries = { ...state.entries }
+    delete entries[id]
+    state.entries = entries
     if (state.current == id) {
-      state.current = { status: store.status.SUCCESS, value: DEFAULT_VALUE }
+      state.current = state.default
+    }
+  },
+
+  current(state, { id }) {
+    const entries = { ...state.entries }
+    delete entries[id]
+    state.entries = entries
+    if (state.current == id) {
+      state.current = state.default
     }
   }
 }

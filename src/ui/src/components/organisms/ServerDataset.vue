@@ -7,17 +7,24 @@ import { mapState } from "vuex";
 import * as peekaboo from "../../lib/peekaboo";
 
 export default {
-
   computed: mapState({
-    entries: state => state.dataset.entries?.values?.map(value => ({value: value.id, text: value.name})) || [],
-    current: state => state.dataset.current.value || peekaboo.dataset.default
+    entries: (state) =>
+      Object.entries(state.dataset.entries).map(([key, value]) => ({
+        value: key,
+        text: value,
+      })) || [],
+    current: (state) => state.dataset.current || state.dataset.default,
   }),
 
   methods: {
     set(id) {
-      this.$store.dispatch("dataset/current", id);
-    }
-  }
+      this.$store.dispatch("dataset/current", { id });
+    },
+  },
+
+  created: function () {
+    this.$store.dispatch("dataset/load");
+  },
 };
 </script>
 
