@@ -4,7 +4,7 @@ const store = require('../../lib/store')
 const server = require('../../lib/server')
 
 const state = () => ({
-  mode: { status: store.status.SUCCESS, value: 'memoize' }
+  mode: { status: store.status.SUCCESS, value: 'memoize' },
 })
 
 const actions = {
@@ -17,10 +17,9 @@ const actions = {
       .catch(error => commit('setMode', { status: store.status.FAIL, value: state.mode, error }))
   },
   setMode ({ commit, state }, value) {
-    // @todo rollback if fail
     commit('setMode', { status: store.status.LOADING, value: state.mode })
 
-    const current = state.mode
+    const backup = state.mode
     window.fetch(`${server.host}/settings/mode`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
@@ -28,7 +27,7 @@ const actions = {
     })
       .then(response => response.json())
       .then(() => commit('setMode', { status: store.status.SUCCESS, value }))
-      .catch(error => commit('setMode', { status: store.status.FAIL, value: current, error }))
+      .catch(error => commit('setMode', { status: store.status.FAIL, value: backup, error }))
   }
 }
 

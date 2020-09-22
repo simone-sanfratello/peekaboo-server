@@ -31,10 +31,10 @@ const http = {
     if (_headers['set-cookie']) {
       if (Array.isArray(_headers['set-cookie'])) {
         for (let i = 0; i < _headers['set-cookie'].length; i++) {
-          _headers['set-cookie'][i] = http.replaceCookieDomain(_headers['set-cookie'][i], request)
+          _headers['set-cookie'][i] = http.adjustCookie(_headers['set-cookie'][i], request)
         }
       } else {
-        _headers['set-cookie'] = http.replaceCookieDomain(_headers['set-cookie'], request)
+        _headers['set-cookie'] = http.adjustCookie(_headers['set-cookie'], request)
       }
     }
     if (!headers.status) {
@@ -44,10 +44,12 @@ const http = {
     return _headers
   },
 
-  replaceCookieDomain: function (cookie, request) {
-    // const _cookie = cookie.replace(/Domain=[a-z.]*;/i, `Domain=.${request.hostname};`)
-    const _cookie = cookie.replace(/Domain=[a-z.]*;/i, '')
+  adjustCookie: function (cookie, request) {
+    const _cookie = cookie
+      .replace(/Domain=[a-z.]*;/i, '')
+      .replace(/\u0001/g, ' ')
     if (!request.https) {
+      // .replace(/Domain=[a-z.]*;/i, `Domain=.${request.hostname};`)
       return _cookie.replace(/secure/i, '')
     }
     return _cookie

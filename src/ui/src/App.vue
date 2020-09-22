@@ -4,7 +4,7 @@
       <v-list dense>
         <v-list-item link to="/">
           <v-list-item-action>
-            <v-icon>mdi-bulletin-board</v-icon>
+            <v-icon>mdi-home</v-icon>
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title>Home</v-list-item-title>
@@ -13,10 +13,19 @@
 
         <v-list-item link to="/cache">
           <v-list-item-action>
-            <v-icon>mdi-buffer</v-icon>
+            <v-icon>mdi-database</v-icon>
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title>Cache</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item link to="/dataset">
+          <v-list-item-action>
+            <v-icon>mdi-animation</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Dataset</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -36,12 +45,17 @@
 
     <v-app-bar app color="primary" dark>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <img class="icon ml-2 mr-2" src="@/assets/img/icon.png"></img>
+      <img class="icon ml-2 mr-2" src="@/assets/img/icon.png" />
       <v-toolbar-title>peekaboo-server</v-toolbar-title>
 
       <v-spacer></v-spacer>
       <v-toolbar-title class="fix-select">
         <server-mode></server-mode>
+      </v-toolbar-title>
+
+      <v-spacer></v-spacer>
+      <v-toolbar-title class="fix-select">
+        <server-dataset></server-dataset>
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
@@ -70,13 +84,15 @@
 <script>
 import Monitor from "./components/organisms/Monitor";
 import ServerMode from "./components/organisms/ServerMode";
+import ServerDataset from "./components/organisms/ServerDataset";
 
 export default {
   name: "App",
 
   components: {
     Monitor,
-    ServerMode
+    ServerMode,
+    ServerDataset
   },
 
   props: {
@@ -84,7 +100,7 @@ export default {
   },
 
   data: () => ({
-    drawer: -1
+    drawer: false
   }),
 
   created: function() {
