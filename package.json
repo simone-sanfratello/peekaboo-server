@@ -5,6 +5,7 @@
   "engines": {
     "node": ">=12"
   },
+  "files": ["src", "bin", "cert", "doc", "settings"],
   "standard": {
     "globals": [
       "describe",
@@ -50,7 +51,7 @@
   "scripts": {
     "start": "bin/peekaboo-server.js",
     "start-dev": "node dev/server.js",
-    "start-dev:watch": "nodemon dev/server.js --ignore src/ui",
+    "start-dev:watch": "nodemon dev/server.js --ignore src/ui --ignore cache",
     "test": "jest",
     "test-coverage": "jest --coverage",
     "build": "cd src/ui; npm run build",

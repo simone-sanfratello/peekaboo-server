@@ -30,9 +30,9 @@ const main = function (fastify) {
       response.code(400).send('INVALID_DATASET_ENTRY_ID')
     }
   })
-  fastify.post('/settings/dataset/current', async (request, response) => {
+  fastify.post('/settings/dataset/set', async (request, response) => {
     try {
-      await fastify.peekaboo.dataset.set(request.body.current)
+      await fastify.peekaboo.dataset.set(request.body.id)
       response.send({})
     } catch {
       response.code(400).send('INVALID_DATASET_ENTRY_ID')

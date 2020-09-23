@@ -18,7 +18,8 @@ export default {
 
   methods: {
     set(id) {
-      this.$store.dispatch("dataset/current", { id });
+      console.log('onchange', id)
+      this.$store.dispatch("dataset/set", { id });
     },
   },
 

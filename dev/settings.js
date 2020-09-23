@@ -27,7 +27,7 @@ module.exports = function (settings) {
     response.headers.vary = 'Accept-Encoding'
 
     // mask logout error
-    if (response.statusCode === 401 && !request.raw.url.includes('login') && !request.raw.url.includes('otp')) {
+    if (response.statusCode === 401 && !request.raw.url.includes('/all/sca/login')) {
       response.statusCode = 404
     } else if (response.statusCode > 399 && response.statusCode !== 403) {
       // mask all error
@@ -43,6 +43,17 @@ module.exports = function (settings) {
   settings.cache = {
     expire: 365 * 24 * 60 * 60 * 1000, // 1y
     rules: [
+      // cache login/otp without body
+      {
+        request: {
+          methods: 'post',
+          route: /\/all\/sca\/(login|otp)$/,
+        },
+        response: {
+          status: (status) =>  status == 200
+        }
+      },
+      // cache all
       {
         request: {
           methods: '*',
@@ -53,7 +64,7 @@ module.exports = function (settings) {
         response: {
           status: (status) => status > 199 && status < 501
         }
-      }
+      },
     ],
     storage: {
       mode: 'fs',
