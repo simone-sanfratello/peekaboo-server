@@ -31,7 +31,7 @@ const actions = {
       body: JSON.stringify({ name })
     })
       .then(response => response.json())
-      .then(data => commit('create', { id: data.id, name }))
+      .then(data => commit('create', { status: store.status.SUCCESS, id: data.id, name }))
       .catch(error => commit('set', { ...backup, status: store.status.FAIL, error }))
   },
 
@@ -45,7 +45,7 @@ const actions = {
       body: JSON.stringify({ name })
     })
       .then(response => response.json())
-      .then(data => commit('update', { id, name }))
+      .then(data => commit('update', { status: store.status.SUCCESS, id, name }))
       .catch(error => commit('set', { ...backup, status: store.status.FAIL, error }))
   },
 
@@ -55,22 +55,22 @@ const actions = {
     const backup = state
     window.fetch(`${server.host}/settings/dataset/${id}`, { method: 'DELETE' })
       .then(response => response.json())
-      .then(data => commit('remove', { id }))
+      .then(data => commit('remove', { status: store.status.SUCCESS, id }))
       .catch(error => commit('set', { ...backup, status: store.status.FAIL, error }))
   },
 
   // set current
-  current({ commit, state }, { id }) {
+  set({ commit, state }, { id }) {
     commit('set', { status: store.status.LOADING })
 
     const backup = state.entries
-    window.fetch(`${server.host}/settings/dataset/current`, {
+    window.fetch(`${server.host}/settings/dataset/set`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ id })
     })
       .then(response => response.json())
-      .then(data => commit('current', { id }))
+      .then(data => commit('set', { status: store.status.SUCCESS, current: id }))
       .catch(error => commit('set', { ...backup, status: store.status.FAIL, error }))
   },
 }
