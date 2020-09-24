@@ -4,7 +4,7 @@ const store = require('../../lib/store')
 const server = require('../../lib/server')
 
 const state = () => ({
-  mode: { status: store.status.SUCCESS, value: 'memoize' },
+  mode: { status: store.status.SUCCESS, value: 'memoize' }
 })
 
 const actions = {

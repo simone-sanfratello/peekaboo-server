@@ -15,7 +15,7 @@ module.exports = function (settings) {
   }
   */
 
-  function fixErrorResponses(request, response) {
+  function fixErrorResponses (request, response) {
     const [url] = request.raw.url.split('?')
     // known broken responses (uat)
     return (
@@ -39,7 +39,7 @@ module.exports = function (settings) {
     response.headers['access-control-allow-credentials'] = 'true'
     response.headers['access-control-allow-origin'] = request.headers.origin
 
-    response.headers.vary = 'Accept-Encoding' 
+    response.headers.vary = 'Accept-Encoding'
 
     // mask session expire error
     if ((response.statusCode === 401 || response.statusCode === 403) && !request.raw.url.includes('/all/sca/login')) {
@@ -68,7 +68,7 @@ module.exports = function (settings) {
       {
         request: {
           methods: 'post',
-          route: /^\/url\/.+\/all\/sca\/(login|otp)/,
+          route: /^\/url\/.+\/all\/sca\/(login|otp)/
         },
         response: {
           status: (status) => status == 200
@@ -85,7 +85,7 @@ module.exports = function (settings) {
         response: {
           status: (status) => status > 199 && status < 501
         }
-      },
+      }
       // @todo special body?
     ],
     storage: {

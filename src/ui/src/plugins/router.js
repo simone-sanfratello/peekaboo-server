@@ -10,7 +10,7 @@ Vue.use(VueRouter)
 const routes = [
   { path: '/', component: Dashboard },
   { path: '/cache', component: Cache },
-  { path: '/dataset', component: Dataset },
+  { path: '/dataset', component: Dataset }
 ]
 
 const router = new VueRouter({

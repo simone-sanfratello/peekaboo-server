@@ -16,7 +16,7 @@ process
   .on('uncaughtException', (error) => {
     log.error({ message: 'uncaughtException', error })
   })
-  
+
 async function main () {
   let settings
   try {

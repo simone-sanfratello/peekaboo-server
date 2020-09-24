@@ -11,7 +11,7 @@ const state = () => ({
 })
 
 const actions = {
-  load({ commit, state }) {
+  load ({ commit, state }) {
     commit('set', { status: store.status.LOADING })
 
     const backup = state.entries
@@ -21,7 +21,7 @@ const actions = {
       .catch(error => commit('set', { ...backup, status: store.status.FAIL, error }))
   },
 
-  create({ commit, state }, { name }) {
+  create ({ commit, state }, { name }) {
     commit('set', { status: store.status.LOADING })
 
     const backup = state.entries
@@ -35,7 +35,7 @@ const actions = {
       .catch(error => commit('set', { ...backup, status: store.status.FAIL, error }))
   },
 
-  update({ commit, state }, { id, name }) {
+  update ({ commit, state }, { id, name }) {
     commit('set', { status: store.status.LOADING })
 
     const backup = state.entries
@@ -49,7 +49,7 @@ const actions = {
       .catch(error => commit('set', { ...backup, status: store.status.FAIL, error }))
   },
 
-  remove({ commit, state }, { id }) {
+  remove ({ commit, state }, { id }) {
     commit('set', { status: store.status.LOADING })
 
     const backup = state
@@ -60,7 +60,7 @@ const actions = {
   },
 
   // set current
-  set({ commit, state }, { id }) {
+  set ({ commit, state }, { id }) {
     commit('set', { status: store.status.LOADING })
 
     const backup = state
@@ -72,11 +72,11 @@ const actions = {
       .then(response => response.json())
       .then(data => commit('set', { status: store.status.SUCCESS, current: id }))
       .catch(error => commit('set', { ...backup, status: store.status.FAIL, error }))
-  },
+  }
 }
 
 const mutations = {
-  set(state, { status, entries, current, default: default_ }) {
+  set (state, { status, entries, current, default: default_ }) {
     state.status = status
     if (status != store.status.SUCCESS) {
       state.entries = { ...state.entries }
@@ -95,7 +95,7 @@ const mutations = {
     }
   },
 
-  create(state, { id, name }) {
+  create (state, { id, name }) {
     state.status = status
     state.entries = {
       ...state.entries,
@@ -103,13 +103,13 @@ const mutations = {
     }
   },
 
-  update(state, { id, name }) {
+  update (state, { id, name }) {
     const entries = { ...state.entries }
     entries[id] = name
     state.entries = entries
   },
 
-  remove(state, { id }) {
+  remove (state, { id }) {
     const entries = { ...state.entries }
     delete entries[id]
     state.entries = entries
@@ -118,7 +118,7 @@ const mutations = {
     }
   },
 
-  current(state, { id }) {
+  current (state, { id }) {
     const entries = { ...state.entries }
     delete entries[id]
     state.entries = entries

@@ -36,7 +36,10 @@
 import { mapState } from "vuex";
 import RealtimeStatus from "../atoms/RealtimeStatus";
 
-let _connecting
+let _connecting;
+let _attempts = 0;
+let _retries = 10;
+let _deelay = 1000;
 
 export default {
   components: {
@@ -45,11 +48,19 @@ export default {
 
   computed: mapState({
     connection: function (state) {
-      if (state.history?.connection != "connected" && !_connecting) {
-        _connecting = setTimeout(() => this.connect(), 500);
-      } else {
-        clearTimeout(_connecting)
-        _connecting = null
+      if (
+        state.history?.connection != "connected" &&
+        !_connecting &&
+        _attempts < _retries
+      ) {
+        _connecting = setTimeout(() => {
+          _connecting = null;
+          this.connect();
+        }, _deelay * ++_attempts);
+      } else if (state.history?.connection == "connected") {
+        _attempts = 0;
+        clearTimeout(_connecting);
+        _connecting = null;
       }
       return state.history.connection;
     },

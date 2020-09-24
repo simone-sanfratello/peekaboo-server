@@ -116,6 +116,7 @@ export default {
     },
     remove: function() {
       this.$store.dispatch("cache/remove", this.hash);
+      this.entry = null
     }
   },
 
