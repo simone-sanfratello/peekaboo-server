@@ -36,6 +36,8 @@
 import { mapState } from "vuex";
 import RealtimeStatus from "../atoms/RealtimeStatus";
 
+let _connecting
+
 export default {
   components: {
     RealtimeStatus,
@@ -43,8 +45,11 @@ export default {
 
   computed: mapState({
     connection: function (state) {
-      if (state.history?.connection != "connected") {
-        setTimeout(() => this.connect(), 2000);
+      if (state.history?.connection != "connected" && !_connecting) {
+        _connecting = setTimeout(() => this.connect(), 500);
+      } else {
+        clearTimeout(_connecting)
+        _connecting = null
       }
       return state.history.connection;
     },

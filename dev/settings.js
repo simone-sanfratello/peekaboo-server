@@ -39,7 +39,7 @@ module.exports = function (settings) {
     response.headers['access-control-allow-credentials'] = 'true'
     response.headers['access-control-allow-origin'] = request.headers.origin
 
-    response.headers.vary = 'Accept-Encoding'
+    response.headers.vary = 'Accept-Encoding' 
 
     // mask session expire error
     if ((response.statusCode === 401 || response.statusCode === 403) && !request.raw.url.includes('/all/sca/login')) {

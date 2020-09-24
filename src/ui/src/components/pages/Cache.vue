@@ -66,10 +66,7 @@ export default {
   }),
 
   computed: mapState({
-    cache: state => {
-      console.log('up')
-      return state.cache.summary
-    }
+    cache: state => state.cache.summary
   }),
 
   methods: {

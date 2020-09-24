@@ -1,6 +1,7 @@
 <template>
   <div>
-    <div v-if="!entry">cache is removed</div>
+    <div v-if="status == store.status.LOADING">loading cache ...</div>
+    <div v-if="status != store.status.LOADING && !entry">cache is removed</div>
 
     <v-expansion-panels v-if="entry" :value="open">
       <v-expansion-panel class="grey darken-4 white--text http-request">
@@ -73,6 +74,7 @@
 <script>
 import { mapGetters } from "vuex";
 import format from "../../lib/format";
+import store from "../../lib/store";
 
 export default {
   props: {
@@ -82,8 +84,10 @@ export default {
 
   data: function() {
     return {
+      store,
       open: this.opened ? 0 : null,
       entry: null,
+      status: store.status.LOADING,
       editable: false
     };
   },
@@ -120,12 +124,13 @@ export default {
     this.unwatch = this.$store.watch(
       (state, getters) => getters["cache/get"](this.hash),
       (new_, old) => {
-        this.entry = new_;
+        this.entry = new_.value;
+        this.status = new_.status;
         if (!this.entry) {
           this.response = null;
           return;
         }
-        this.response = format.toJson(new_.response);
+        this.response = format.toJson(this.entry.value.response);
       }
     );
   },
