@@ -1,5 +1,12 @@
 <template>
-  <v-select dense outlined :items="entries" v-bind:value="current" label="dataset" @change="set"></v-select>
+  <v-select
+    dense
+    outlined
+    :items="entries"
+    v-bind:value="current"
+    label="dataset"
+    @change="set"
+  ></v-select>
 </template>
 
 <script>
@@ -17,14 +24,14 @@ export default {
   }),
 
   methods: {
-    set(id) {
-      console.log('onchange', id)
-      this.$store.dispatch("dataset/set", { id });
+    async set(id) {
+      await this.$store.dispatch("dataset/set", { id })
+      this.$store.dispatch("cache/summary")
     },
   },
 
   created: function () {
-    this.$store.dispatch("dataset/load");
+    this.$store.dispatch("dataset/load")
   },
 };
 </script>

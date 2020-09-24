@@ -5,7 +5,14 @@
     </v-col>
 
     <v-col>
-      <v-btn fab dark small @click="connect" v-if="connection == 'disconnected'" color="green">
+      <v-btn
+        fab
+        dark
+        small
+        @click="connect"
+        v-if="connection == 'disconnected'"
+        color="green"
+      >
         <v-icon>mdi-satellite-uplink</v-icon>
       </v-btn>
 
@@ -31,11 +38,16 @@ import RealtimeStatus from "../atoms/RealtimeStatus";
 
 export default {
   components: {
-    RealtimeStatus
+    RealtimeStatus,
   },
 
   computed: mapState({
-    connection: state => state.history.connection
+    connection: function (state) {
+      if (state.history?.connection != "connected") {
+        setTimeout(() => this.connect(), 2000);
+      }
+      return state.history.connection;
+    },
   }),
 
   methods: {
@@ -44,8 +56,8 @@ export default {
     },
     disconnect() {
       this.$store.dispatch("history/disconnect");
-    }
-  }
+    },
+  },
 };
 </script>
 

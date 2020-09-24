@@ -1,8 +1,8 @@
 # TODO
 
 - doc
-  - [ ] mode
-  - [ ] settings
+  - [x] mode
+  - [ ] ui settings
   - [ ] docker
   - [ ] howto https
     - create alias for localhost
@@ -24,6 +24,7 @@
   - [ ] paginate dashboard history
   - [ ] binary request and response
   - [ ] view and edit settings on ui
+  - [ ] improve ui (loader, pagination ...)
 
 - publish
   - [ ] jsdoc

@@ -66,20 +66,24 @@ export default {
   }),
 
   computed: mapState({
-    cache: state => state.cache.summary
+    cache: state => {
+      console.log('up')
+      return state.cache.summary
+    }
   }),
 
   methods: {
-    clearCache: function() {
-      this.$store.dispatch("cache/clear");
+    clearCache: async function() {
+      await this.$store.dispatch("cache/clear")
+      this.$store.dispatch("cache/summary")
     },
-    remove: function(hash) {
-      this.$store.dispatch("cache/remove", hash);
+    remove: async function(hash) {
+      this.$store.dispatch("cache/remove", hash)
     }
   },
 
   created: function() {
-    this.$store.dispatch("cache/summary");
+    this.$store.dispatch("cache/summary")
   }
 };
 </script>

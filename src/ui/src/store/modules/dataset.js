@@ -15,7 +15,7 @@ const actions = {
     commit('set', { status: store.status.LOADING })
 
     const backup = state.entries
-    window.fetch(`${server.host}/settings/dataset`, { method: 'GET' })
+    window.fetch(`${server.host}/dataset`, { method: 'GET' })
       .then(response => response.json())
       .then(data => commit('set', { status: store.status.SUCCESS, ...data }))
       .catch(error => commit('set', { ...backup, status: store.status.FAIL, error }))
@@ -25,7 +25,7 @@ const actions = {
     commit('set', { status: store.status.LOADING })
 
     const backup = state.entries
-    window.fetch(`${server.host}/settings/dataset`, {
+    window.fetch(`${server.host}/dataset`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name })
@@ -39,7 +39,7 @@ const actions = {
     commit('set', { status: store.status.LOADING })
 
     const backup = state.entries
-    window.fetch(`${server.host}/settings/dataset/${id}`, {
+    window.fetch(`${server.host}/dataset/${id}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name })
@@ -53,7 +53,7 @@ const actions = {
     commit('set', { status: store.status.LOADING })
 
     const backup = state
-    window.fetch(`${server.host}/settings/dataset/${id}`, { method: 'DELETE' })
+    window.fetch(`${server.host}/dataset/${id}`, { method: 'DELETE' })
       .then(response => response.json())
       .then(data => commit('remove', { status: store.status.SUCCESS, id }))
       .catch(error => commit('set', { ...backup, status: store.status.FAIL, error }))
@@ -63,9 +63,9 @@ const actions = {
   set({ commit, state }, { id }) {
     commit('set', { status: store.status.LOADING })
 
-    const backup = state.entries
-    window.fetch(`${server.host}/settings/dataset/set`, {
-      method: 'POST',
+    const backup = state
+    window.fetch(`${server.host}/dataset/set`, {
+      method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ id })
     })
