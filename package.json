@@ -1,11 +1,18 @@
 {
   "name": "peekaboo-server",
-  "version": "0.0.4-dev",
+  "version": "0.0.5-dev",
   "description": "Reverse proxy for test doubles",
   "engines": {
     "node": ">=12"
   },
-  "files": ["src", "bin", "cert", "doc", "settings"],
+  "bin": "bin/peekaboo-server.js",
+  "files": [
+    "src",
+    "bin",
+    "cert",
+    "doc",
+    "settings"
+  ],
   "standard": {
     "globals": [
       "describe",
@@ -25,7 +32,6 @@
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
     "get-port": "^5.1.1",
-    "got": "^11.6.2",
     "husky": "^4.3.0",
     "jest": "^26.4.2",
     "node-fetch": "^2.6.1",
@@ -38,9 +44,11 @@
     "fastify": "^3.4.1",
     "fastify-cors": "^4.1.0",
     "fastify-formbody": "^5.0.0",
-    "fastify-peekaboo": "^2.0.1",
+    "fastify-peekaboo": "^2.1.0",
     "fastify-static": "^3.2.0",
     "fastify-websocket": "^2.0.7",
+    "got": "^11.7.0",
+    "mime": "^2.4.6",
     "peppino": "^0.1.1-alpha",
     "pino": "^6.6.1",
     "pino-pretty": "^4.2.1",
@@ -54,7 +62,7 @@
     "start-dev:watch": "nodemon dev/server.js --ignore src/ui --ignore cache",
     "test": "jest",
     "test-coverage": "jest --coverage",
-    "build": "cd src/ui; npm run build",
+    "build": "cd src/ui; npm run build; cd -; rm -rf bin/ui; mv src/ui/dist bin/ui",
     "release": "standard-version"
   }
 }

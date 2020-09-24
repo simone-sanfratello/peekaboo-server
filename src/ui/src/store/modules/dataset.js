@@ -78,10 +78,10 @@ const actions = {
 const mutations = {
   set (state, { status, entries, current, default: default_ }) {
     state.status = status
-    if (status != store.status.SUCCESS) {
+    if (status !== store.status.SUCCESS) {
       state.entries = { ...state.entries }
-      state.current = state.current
-      state.default = state.default
+      state.current = current
+      state.default = default_
       return
     }
     if (entries) {
@@ -95,7 +95,7 @@ const mutations = {
     }
   },
 
-  create (state, { id, name }) {
+  create (state, { status, id, name }) {
     state.status = status
     state.entries = {
       ...state.entries,
@@ -113,7 +113,7 @@ const mutations = {
     const entries = { ...state.entries }
     delete entries[id]
     state.entries = entries
-    if (state.current == id) {
+    if (state.current === id) {
       state.current = state.default
     }
   },
@@ -122,7 +122,7 @@ const mutations = {
     const entries = { ...state.entries }
     delete entries[id]
     state.entries = entries
-    if (state.current == id) {
+    if (state.current === id) {
       state.current = state.default
     }
   }

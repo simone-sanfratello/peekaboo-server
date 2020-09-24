@@ -5,6 +5,7 @@
 /coverage
 /build
 /test/output
+/bin/ui
 
 node_modules
 npm-debug.log
@@ -15,6 +16,8 @@ package-lock.json
 .vagrant
 .vscode
 .nyc*
+
+*.tgz
 
 # Logs
 logs

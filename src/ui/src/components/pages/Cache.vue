@@ -21,7 +21,7 @@
         </v-toolbar>
       </template>
 
-      <v-progress-circular v-if="cache.status == 'loading'" indeterminate color="primary"></v-progress-circular>
+      <v-progress-circular v-if="cache.status === 'loading'" indeterminate color="primary"></v-progress-circular>
       <v-expansion-panels v-for="entry of cache.value" :key="entry.hash" class="mb-2">
         <v-expansion-panel>
           <v-expansion-panel-header>

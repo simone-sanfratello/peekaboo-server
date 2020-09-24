@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="status == store.status.LOADING">loading cache ...</div>
+    <div v-if="status === store.status.LOADING">loading cache ...</div>
     <div v-if="status != store.status.LOADING && !entry">cache is removed</div>
 
     <v-expansion-panels v-if="entry" :value="open">

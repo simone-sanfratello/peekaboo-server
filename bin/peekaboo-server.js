@@ -22,10 +22,7 @@ async function main () {
   try {
     settings = cli.args()
   } catch (error) {
-    // print to console because log settings may be not right
-    if (error.message) {
-      console.error(error.message)
-    }
+    // print to console because log settings may be incorrect
     console.error(error)
     process.exit(-1)
   }

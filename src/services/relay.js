@@ -151,7 +151,8 @@ const relay = function (fastify, settings) {
           size: request.relay.payload.length,
           time,
           status: response.statusCode,
-          cached: response.getHeader('x-peekaboo-hash')
+          cached: response.getHeader('x-peekaboo-hash'),
+          dataset: fastify.peekaboo.dataset.current()
         },
         request: {
           url: request.params['*'],
@@ -181,7 +182,8 @@ const relay = function (fastify, settings) {
       size: request.relay.payload.length,
       time,
       status: response.statusCode,
-      cached: response.getHeader('x-peekaboo-hash')
+      cached: response.getHeader('x-peekaboo-hash'),
+      dataset: fastify.peekaboo.dataset.current()
     })
   })
 }

@@ -22,7 +22,7 @@
         </v-toolbar>
       </template>
 
-      <v-progress-circular v-if="history.status == 'loading'" indeterminate color="primary"></v-progress-circular>
+      <v-progress-circular v-if="history.status === 'loading'" indeterminate color="primary"></v-progress-circular>
       <v-expansion-panels v-for="entry of history.value" :key="entry.summary.id" class="mb-2">
         <v-expansion-panel>
           <v-expansion-panel-header>
@@ -50,6 +50,7 @@
                   color="deep-orange darken-1"
                   text-color="white"
                 >using cache</v-chip>
+                <!-- @todo {{entry.summary.dataset}} -->
               </v-col>
               <v-col sm="1" md="1" lg="1">
                 <http-size v-bind:size="entry.summary.size"></http-size>

@@ -1,3 +1,5 @@
+'use strict'
+
 const lib = {
   event: require('./event'),
   history: require('./history'),

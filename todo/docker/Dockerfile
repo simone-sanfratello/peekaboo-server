@@ -1,5 +1,8 @@
 FROM node:12
 
+# build ui and copy to /ui
+# add file-serve to server
+
 ENV PEEKABOO_APP_PORT=8080 \
     PEEKABOO_LOG_LEVEL=warn \
     PEEKABOO_LOG_PRETTY=false \

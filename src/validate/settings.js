@@ -1,3 +1,5 @@
+'use strict'
+
 const superstruct = require('superstruct')
 
 const s = superstruct.struct

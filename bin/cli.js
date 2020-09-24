@@ -1,3 +1,5 @@
+'use strict'
+
 const path = require('path')
 const yargs = require('yargs')
 const settings = require('../src/lib/settings')
@@ -16,7 +18,7 @@ const argv = yargs.argv
 
 const cli = {
   args: function () {
-    const _settings = argv.settings
+    const _settings = argv.settings && argv.settings !== defaultSettings
       ? path.join(process.cwd(), argv.settings)
       : defaultSettings
     return settings.load(_settings)

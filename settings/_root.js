@@ -3,7 +3,7 @@
 const path = require('path')
 const package_ = require('../package.json')
 
-const settings = { }
+const settings = {}
 
 settings.load = [
   path.join(__dirname, '../src/plugins/form-urlencoded'),
@@ -18,6 +18,8 @@ settings.load = [
   path.join(__dirname, '../src/services/dataset'),
   path.join(__dirname, '../src/services/settings'),
 
+  path.join(__dirname, '../src/services/ui'),
+  
   path.join(__dirname, '../src/plugins/cache')
 ]
 

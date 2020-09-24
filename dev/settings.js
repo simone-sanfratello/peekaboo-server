@@ -15,22 +15,6 @@ module.exports = function (settings) {
   }
   */
 
-  function fixErrorResponses (request, response) {
-    const [url] = request.raw.url.split('?')
-    // known broken responses (uat)
-    return (
-      (url.endsWith('/rtl/bacheca/items') && response.statusCode == 400) ||
-      (url.endsWith('/bank-profiles/search') && response.statusCode == 403) ||
-      (url.endsWith('/projects/summary') && response.statusCode == 400) ||
-      (url.endsWith('/getCardDetails') && response.statusCode == 500) ||
-      (url.endsWith('/PromoCode/GetPromoCode') && response.statusCode == 404) ||
-      (url.endsWith('/user-id/balances') && response.statusCode == 404) ||
-      (url.endsWith('/insights/stats/static') && response.statusCode == 400) ||
-      (url.endsWith('/stats/expense-analysis') && response.statusCode == 400) ||
-      (url.endsWith('/movements/recurrent') && response.statusCode == 400)
-    )
-  }
-
   settings.relay.response.rewrite = (request, response) => {
     response.headers['access-control-allow-headers'] = 'Origin,X-Requested-With,Content-Type,Accept,X-Cnctr-Device-Id,X-Cnctr-Channel-Id,X-Cnctr-Bio,X-Cnctr-Fast,cache-control,X-Cnctr-OAuth-Token,cd_channel,X-Cnctr-OAuth-Channel,cd_access_key,set-cookie,x-csrf-token,Authorization,expires,docOne,accessToken,X-Cnctr-Oauth-Token,cd-access-key,X-CSRF-TOKEN,username,clientId,requestId,sessionId,userId,userType,x-ma-sid,x-ma-bid,uniqueid,nbTransactionName,User-Agent,Referer,Accept-Content,Accept-Language,cookie,X-Redirect-Uri,X-Tpp-Redirect-Preferred,X-User-Trace-Id,X-Tx-Trace-Id,X-Server-Session-Trace-Id,X-Client-Session-Trace-Id,client-platform,client-version,X-Nok-Redirect-Uri,X-Bank-Environment,x-bank-service-code'
     response.headers['access-control-allow-methods'] = 'GET,PUT,POST,DELETE,OPTIONS,PATCH'
@@ -44,7 +28,7 @@ module.exports = function (settings) {
     // mask session expire error
     if ((response.statusCode === 401 || response.statusCode === 403) && !request.raw.url.includes('/all/sca/login')) {
       response.statusCode = 404
-    } else if (response.statusCode > 399 && fixErrorResponses(request, response)) {
+    } else if (response.statusCode > 403) {
       // mask errors that break frontend
       response.body = JSON.stringify({
         maskedResponse: true,
@@ -71,7 +55,7 @@ module.exports = function (settings) {
           route: /^\/url\/.+\/all\/sca\/(login|otp)/
         },
         response: {
-          status: (status) => status == 200
+          status: (status) => status === 200
         }
       },
       // cache all without body

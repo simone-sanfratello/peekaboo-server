@@ -23,7 +23,7 @@
         </v-toolbar>
       </template>
 
-      <v-progress-circular v-if="dataset.status == 'loading'" indeterminate color="primary"></v-progress-circular>
+      <v-progress-circular v-if="dataset.status === 'loading'" indeterminate color="primary"></v-progress-circular>
       <v-expansion-panels v-for="entry of dataset.entries" :key="entry.id" class="mb-2">
         <v-expansion-panel>
           <v-expansion-panel-header>
@@ -40,7 +40,7 @@
               </v-col>
               <v-col sm="2">
                 <v-btn
-                  :disabled="entry.id == dataset.default"
+                  :disabled="entry.id === dataset.default"
                   @click="remove(entry.id)"
                   class="right"
                   color="red white--text"

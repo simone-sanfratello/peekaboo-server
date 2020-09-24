@@ -10,7 +10,7 @@
             <v-chip
               small
               color="yellow"
-              v-if="response.body == 'ENDPOINT_ERROR_TIMEOUT'"
+              v-if="response.body === 'ENDPOINT_ERROR_TIMEOUT'"
             >timeout</v-chip>
           </p>
 

@@ -1,3 +1,5 @@
+'use strict'
+
 const wild = {
   start: async function () {
 

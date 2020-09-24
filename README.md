@@ -16,12 +16,6 @@ npm i -g peekaboo-server
 peekaboo-server
 ```
 
-or
-
-```bash
-docker run braces/peekaboo-server:latest @todo
-```
-
 ```bash
 curl @todo request first time 
 curl @todo request with cache

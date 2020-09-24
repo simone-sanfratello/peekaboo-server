@@ -32,3 +32,8 @@ docker run -itd --name peekaboo -p 8080:8080 braces/peekaboo
 docker run --mount type=bind,source="$(pwd)"/settings,target=/app/bin/settings -itd --name peekaboo -p 8080:8080 braces/peekaboo
 
 docker run -e PEEKABOO_LOG_LEVEL=trace -itd --name peekaboo -p 8080:8080 braces/peekaboo
+
+## start
+
+npm i peekaboo-server
+peekaboo-server

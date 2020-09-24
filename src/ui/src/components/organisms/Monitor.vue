@@ -10,7 +10,7 @@
         dark
         small
         @click="connect"
-        v-if="connection == 'disconnected'"
+        v-if="connection === 'disconnected'"
         color="green"
       >
         <v-icon>mdi-satellite-uplink</v-icon>
@@ -22,7 +22,7 @@
         dark
         small
         @click="disconnect"
-        v-if="connection == 'connected'"
+        v-if="connection === 'connected'"
         color="red"
       >
         <v-icon>mdi-close</v-icon>
@@ -57,7 +57,7 @@ export default {
           _connecting = null;
           this.connect();
         }, _deelay * ++_attempts);
-      } else if (state.history?.connection == "connected") {
+      } else if (state.history?.connection === "connected") {
         _attempts = 0;
         clearTimeout(_connecting);
         _connecting = null;
