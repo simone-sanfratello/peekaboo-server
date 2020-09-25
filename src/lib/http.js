@@ -23,34 +23,62 @@ const http = {
     return _headers
   },
 
-  adjustResponseHeaders: function (headers, request, response) {
-    const _headers = { ...headers }
+  adjustResponseHeaders: function (request, response) {
+    const _headers = { ...response.headers }
     for (const trim of trimResponseHeaders) {
       delete _headers[trim]
     }
-    if (_headers['set-cookie']) {
-      if (Array.isArray(_headers['set-cookie'])) {
-        for (let i = 0; i < _headers['set-cookie'].length; i++) {
-          _headers['set-cookie'][i] = http.adjustCookie(_headers['set-cookie'][i], request)
-        }
-      } else {
-        _headers['set-cookie'] = http.adjustCookie(_headers['set-cookie'], request)
-      }
+    if (!_headers.status) {
+      _headers.status = response.statusCode
     }
-    if (!headers.status) {
-      headers.status = response.statusCode
-    }
-
     return _headers
   },
 
-  adjustCookie: function (cookie, request) {
-    const _cookie = cookie
-      .replace(/Domain=[a-z.]*;/i, '')
-      .replace(/\u0001/g, ' ')
-    if (!request.https) {
-      // .replace(/Domain=[a-z.]*;/i, `Domain=.${request.hostname};`)
-      return _cookie.replace(/secure/i, '')
+  /**
+   * @param {*} options.stripDomain
+   * @param {*} options.fixChars
+   * @param {*} options.fixHttps
+   */
+  adjustResponseCookies: function (request, response, options) {
+    const _headers = { ...response.headers }
+    if (_headers['set-cookie']) {
+      if (Array.isArray(_headers['set-cookie'])) {
+        for (let i = 0; i < _headers['set-cookie'].length; i++) {
+          _headers['set-cookie'][i] = http.normalizeCookie(_headers['set-cookie'][i], request, options)
+        }
+      } else {
+        _headers['set-cookie'] = http.normalizeCookie(_headers['set-cookie'], request, options)
+      }
+    }
+    return _headers
+  },
+
+  /**
+   * 
+   * @param {*} cookie 
+   * @param {*} request 
+   * @param {*} options.replaceDomain
+   * @param {*} options.fixChars
+   * @param {*} options.fixSameSite
+   * @param {*} options.fixSameSite
+   */
+  normalizeCookie: function (cookie, request, options = {}) {
+    let _cookie = cookie
+    if (options.fixChars) {
+      _cookie = _cookie.replace(/\u0001/g, ' ')
+    }
+    if (options.replaceDomain) {
+      _cookie = _cookie.replace(/domain=[a-z0-9\-.]*;/i, `Domain=${options.replaceDomain};`)
+    }
+    if (options.fixSameSite) {
+      if (_cookie.match(/samesite/i)) {
+        _cookie = _cookie.replace(/samesite=[a-z0-9\-.]*;/i, `SameSite=${options.fixSameSite};`)
+      } else {
+        _cookie += `; SameSite=${options.fixSameSite}`
+      }
+    }
+    if (options.fixSecure && !_cookie.match(/secure/i)) {
+      _cookie += `; Secure`
     }
     return _cookie
   },

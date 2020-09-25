@@ -22,7 +22,7 @@ go build -ldflags "-X main.Version=$(git describe --tags)"
 
 sudo mv /tmp/mkcert/mkcert /usr/local/bin/
 mkcert -install
-mkcert -key-file cert/key.pem -cert-file cert/cert.pem localhost
+mkcert -key-file cert/key.pem -cert-file cert/cert.pem illimity.localhost
 
 #### docker
 

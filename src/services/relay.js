@@ -28,9 +28,11 @@ const relay = function (fastify, settings) {
       const forward = {
         ...options,
         url,
-        query: request.query,
         method: request.method,
         headers: http.adjustRequestHeaders(request.headers)
+      }
+      if (request.query) {
+        forward.searchParams = request.query
       }
 
       if (settings.relay.request.rewrite) {
@@ -53,7 +55,7 @@ const relay = function (fastify, settings) {
       }
 
       const target = await got(forward)
-      target.headers = http.adjustResponseHeaders(target.headers, request, target)
+      target.headers = http.adjustResponseHeaders(request, target)
       try {
         target.body = http.adjustResponseBody(target, request)
       } catch (error) {
