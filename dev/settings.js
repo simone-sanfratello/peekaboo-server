@@ -13,8 +13,8 @@ module.exports = function (settings) {
 
   settings.server.port = 443
   settings.server.https = {
-    key: fs.readFileSync(path.join(__dirname, '../cert/key.pem')),
-    cert: fs.readFileSync(path.join(__dirname, '../cert/cert.pem'))
+    key: fs.readFileSync(path.join('/home/simone/Desktop/offline-cache-homebanking/cert/illimity.localhost-key.pem')),
+    cert: fs.readFileSync(path.join('/home/simone/Desktop/offline-cache-homebanking/cert/illimity.localhost.pem'))
   }
 
   settings.relay.response.rewrite = (request, response) => {
@@ -65,7 +65,6 @@ module.exports = function (settings) {
           status: (status) => status > 199 && status < 501
         }
       }
-      // @todo special body? movements ...
     ],
     storage: {
       mode: 'fs',

@@ -1,15 +1,21 @@
+### Setup
+
+
+- npm install & npm install (replace npm i -g peekaboo-server)
+- sudo vim /etc/hosts >> "127.0.0.1 myapp.local" (cookie)
+- download https://github.com/FiloSottile/mkcert/releases
+  - MAC: sudo brew mkcert
+- mkcert -install
+- mkcert -key-file cert/key.pem -cert-file cert/cert.pem myapp.local
+- start apps/portal patch .env.uat https://myapp.local/url/https...
+- go to https://myapp.local/ui
+- use application
+
 #### curl
 
 curl -X POST -i 'http://localhost:8080/url/https://postman-echo.com/post?a=b' --data "param1=value1&param2=value2"
 
 curl http://localhost:8080/url/https://google.com
-
-#### self signed (not valid)
-
-openssl req -x509 -out cert/cert.pem -keyout cert/key.pem \
-  -newkey rsa:2048 -nodes -sha256 \
-  -subj '/CN=localhost' -extensions EXT -config <( \
-   printf "[dn]\nCN=localhost\n[req]\ndistinguished_name = dn\n[EXT]\nsubjectAltName=DNS:localhost\nkeyUsage=digitalSignature\nextendedKeyUsage=serverAuth")
 
 #### mkcert
 
@@ -22,7 +28,7 @@ go build -ldflags "-X main.Version=$(git describe --tags)"
 
 sudo mv /tmp/mkcert/mkcert /usr/local/bin/
 mkcert -install
-mkcert -key-file cert/key.pem -cert-file cert/cert.pem illimity.localhost
+mkcert myapp.local
 
 #### docker
 
