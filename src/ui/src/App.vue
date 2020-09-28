@@ -39,7 +39,6 @@
           </v-list-item-content>
         </v-list-item>
         -->
-        
       </v-list>
     </v-navigation-drawer>
 
@@ -92,20 +91,20 @@ export default {
   components: {
     Monitor,
     ServerMode,
-    ServerDataset
+    ServerDataset,
   },
 
   props: {
-    source: String
+    source: String,
   },
 
   data: () => ({
-    drawer: false
+    drawer: false,
   }),
 
-  created: function() {
+  created: function () {
     this.$store.dispatch("history/connect");
-  }
+  },
 };
 </script>
 

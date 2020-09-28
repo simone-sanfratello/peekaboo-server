@@ -62,6 +62,7 @@
     "start-dev:watch": "nodemon dev/server.js --ignore src/ui --ignore cache",
     "test": "jest",
     "test-coverage": "jest --coverage",
+    "format": "standard --fix",
     "build": "cd src/ui; npm run build; cd -; rm -rf bin/ui; mv src/ui/dist bin/ui",
     "release": "standard-version"
   }

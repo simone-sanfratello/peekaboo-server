@@ -54,9 +54,9 @@ const http = {
   },
 
   /**
-   * 
-   * @param {*} cookie 
-   * @param {*} request 
+   *
+   * @param {*} cookie
+   * @param {*} request
    * @param {*} options.replaceDomain
    * @param {*} options.fixChars
    * @param {*} options.fixSameSite
@@ -65,6 +65,7 @@ const http = {
   normalizeCookie: function (cookie, request, options = {}) {
     let _cookie = cookie
     if (options.fixChars) {
+      // eslint-disable-next-line
       _cookie = _cookie.replace(/\u0001/g, ' ')
     }
     if (options.replaceDomain) {
@@ -78,7 +79,7 @@ const http = {
       }
     }
     if (options.fixSecure && !_cookie.match(/secure/i)) {
-      _cookie += `; Secure`
+      _cookie += '; Secure'
     }
     return _cookie
   },

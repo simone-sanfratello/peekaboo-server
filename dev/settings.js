@@ -7,14 +7,14 @@ const default_ = require('../bin/settings/default')
 
 module.exports = function (settings) {
   default_(settings)
-  settings.hostname = 'illimity.localhost'
+  settings.hostname = 'myapp.localhost'
   settings.log.level = 'info'
   settings.log.pretty = true
 
   settings.server.port = 443
   settings.server.https = {
-    key: fs.readFileSync(path.join('/home/simone/Desktop/offline-cache-homebanking/cert/illimity.localhost-key.pem')),
-    cert: fs.readFileSync(path.join('/home/simone/Desktop/offline-cache-homebanking/cert/illimity.localhost.pem'))
+    key: fs.readFileSync(path.join(__dirname, 'cert/myapp.localhost-key.pem')),
+    cert: fs.readFileSync(path.join(__dirname, 'cert/myapp.localhost.pem'))
   }
 
   settings.relay.response.rewrite = (request, response) => {
@@ -30,7 +30,7 @@ module.exports = function (settings) {
 
     /*
     // mask session expire error to prevent logout
-    if ((response.statusCode === 401 || response.statusCode === 403) && !request.raw.url.includes('/all/sca/login') && !request.raw.url.endsWith('/logout')) {
+    if ((response.statusCode === 401 || response.statusCode === 403) && !request.raw.url.includes('/login') && !request.raw.url.endsWith('/logout')) {
       response.statusCode = 404
     }
     */
@@ -50,14 +50,14 @@ module.exports = function (settings) {
           route: /^\/url\/.+\/all\/sca\/(login|otp)/
         },
         response: {
-          status: (status) => status == 200
+          status: (status) => status === 200
         }
       },
       // cache all without body
       {
         request: {
           methods: '*',
-          route: /^\/url/,
+          route: /^\/url/
           // body: true,
           // query: true
         },

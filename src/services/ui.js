@@ -2,7 +2,6 @@
 
 const fs = require('fs')
 const mime = require('mime')
-const url = require('url')
 const path = require('path')
 
 /**

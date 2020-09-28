@@ -19,7 +19,7 @@ settings.load = [
   path.join(__dirname, '../src/services/settings'),
 
   path.join(__dirname, '../src/services/ui'),
-  
+
   path.join(__dirname, '../src/plugins/cache')
 ]
 

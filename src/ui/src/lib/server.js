@@ -1,5 +1,5 @@
 const server = {
-  host: 'https://illimity.localhost',
-  realtime: 'wss://illimity.localhost/realtime'
+  host: 'https://myapp.localhost',
+  realtime: 'wss://myapp.localhost/realtime'
 }
 module.exports = server
