@@ -3,13 +3,14 @@
 - doc
   - [x] mode
   - [ ] ui settings
+    - [ ] hostname, port, cert ...
   - [ ] docker
   - [ ] howto https
     - create alias for localhost
     - mkcert "alias"
 
 - test suite for server (no ui)
-  - [ ] bin
+  - [x] bin
     - start with default
     - load .peekaboo-server.js if no --settings
     - load custom
@@ -25,6 +26,8 @@
   - [ ] binary request and response
   - [ ] view and edit settings on ui
   - [ ] improve ui (loader, pagination ...)
+  - [ ] env settings, check, fix
+    - example: hostname not in /etc/hosts > create; cert not present > create, run mkcert
 
 - publish
   - [ ] jsdoc
@@ -33,8 +36,9 @@
 
 ## FIX
 
-- [ ] one call for fetch request and response
+- [ ] ui one call for fetch request and response
 - [ ] trim cookies chars https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie in lib/http/adjustCookies
+- [ ] ui paginate history
 
 ## ROADMAP
 

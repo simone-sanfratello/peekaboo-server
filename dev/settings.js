@@ -13,8 +13,8 @@ module.exports = function (settings) {
 
   settings.server.port = 443
   settings.server.https = {
-    key: fs.readFileSync(path.join(__dirname, 'cert/myapp.localhost-key.pem')),
-    cert: fs.readFileSync(path.join(__dirname, 'cert/myapp.localhost.pem'))
+    key: fs.readFileSync(path.join(__dirname, '../cert/myapp.localhost-key.pem')),
+    cert: fs.readFileSync(path.join(__dirname, '../cert/myapp.localhost.pem'))
   }
 
   settings.relay.response.rewrite = (request, response) => {

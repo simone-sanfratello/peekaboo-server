@@ -41,5 +41,5 @@ docker run -e PEEKABOO_LOG_LEVEL=trace -itd --name peekaboo -p 8080:8080 braces/
 
 ## start
 
-npm i peekaboo-server
+npm i -g peekaboo-server
 peekaboo-server

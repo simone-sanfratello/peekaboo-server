@@ -10,7 +10,7 @@ async function main () {
     log.init(settings.log)
     log.info({ message: 'server starting' })
     await lib.server(settings).start()
-    await lib.ui.setup(settings, path.join(__dirname, '../src/ui/src/lib/server.js'))
+    // await lib.ui.setup(settings, path.join(__dirname, '../src/ui/src/lib/server.js'))
     lib.event.emit('server', { status: 'on' })
   } catch (error) {
     log.error({ message: 'error on server starting', error })

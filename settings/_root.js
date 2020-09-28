@@ -10,7 +10,6 @@ settings.load = [
   path.join(__dirname, '../src/plugins/cors'),
   path.join(__dirname, '../src/plugins/ws'),
 
-  path.join(__dirname, '../src/services/index'),
   path.join(__dirname, '../src/services/relay'),
   path.join(__dirname, '../src/services/realtime'),
   path.join(__dirname, '../src/services/cache'),

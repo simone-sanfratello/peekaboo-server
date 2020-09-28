@@ -1,16 +1,17 @@
 {
   "name": "peekaboo-server",
-  "version": "0.0.5-dev",
+  "version": "0.0.6-dev",
   "description": "Reverse proxy for test doubles",
   "engines": {
     "node": ">=12"
   },
   "bin": "bin/peekaboo-server.js",
   "files": [
-    "src",
+    "src/lib",
+    "src/plugins",
+    "src/services",
+    "src/validate",
     "bin",
-    "cert",
-    "doc",
     "settings"
   ],
   "standard": {
@@ -45,7 +46,6 @@
     "fastify-cors": "^4.1.0",
     "fastify-formbody": "^5.0.0",
     "fastify-peekaboo": "^2.1.0",
-    "fastify-static": "^3.2.0",
     "fastify-websocket": "^2.0.7",
     "got": "^11.7.0",
     "mime": "^2.4.6",
