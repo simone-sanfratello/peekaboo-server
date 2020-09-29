@@ -1,0 +1,69 @@
+{
+  "name": "peekaboo-server",
+  "version": "0.0.7-dev",
+  "description": "Reverse proxy for test doubles",
+  "engines": {
+    "node": ">=12"
+  },
+  "bin": "bin/peekaboo-server.js",
+  "files": [
+    "src/lib",
+    "src/plugins",
+    "src/services",
+    "src/validate",
+    "bin",
+    "settings"
+  ],
+  "standard": {
+    "globals": [
+      "describe",
+      "test",
+      "expect",
+      "beforeAll",
+      "afterAll",
+      "beforeEach"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
+    "get-port": "^5.1.1",
+    "husky": "^4.3.0",
+    "jest": "^26.4.2",
+    "node-fetch": "^2.6.1",
+    "rimraf": "^3.0.2",
+    "standard": "^14.3.4",
+    "standard-version": "^9.0.0",
+    "uuid": "^8.3.0"
+  },
+  "dependencies": {
+    "fastify": "^3.4.1",
+    "fastify-cors": "^4.1.0",
+    "fastify-formbody": "^5.0.0",
+    "fastify-peekaboo": "^2.1.2",
+    "fastify-websocket": "^2.0.7",
+    "got": "^11.7.0",
+    "mime": "^2.4.6",
+    "peppino": "^0.1.1-alpha",
+    "pino": "^6.6.1",
+    "pino-pretty": "^4.2.1",
+    "request-as-curl": "^0.1.0",
+    "superstruct": "0.8.3",
+    "yargs": "^16.0.3"
+  },
+  "scripts": {
+    "start": "bin/peekaboo-server.js",
+    "start-dev": "node dev/server.js",
+    "start-dev:watch": "nodemon dev/server.js --ignore src/ui --ignore cache",
+    "test": "jest",
+    "test-coverage": "jest --coverage",
+    "format": "standard --fix",
+    "build": "cd src/ui; cp src/lib/server.prod.js src/lib/server.js; npm run build; cd -; rm -rf bin/ui; mv src/ui/dist bin/ui",
+    "release": "standard-version"
+  }
+}

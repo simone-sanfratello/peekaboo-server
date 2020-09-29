@@ -1,0 +1,33 @@
+<template>
+  <div class="http-url subtitle-1">{{format(url, query)}}</div>
+</template>
+
+<script>
+export default {
+  props: {
+    url: String,
+    query: String
+  },
+
+  methods: {
+    format(url, query) {
+      let _format = url;
+      if (query) {
+        _format += "?" + query;
+      }
+      return _format;
+    }
+  }
+};
+</script>
+
+<style>
+.http-url {
+  white-space: nowrap;
+  max-width: 600px;
+  height: 30px;
+  line-height: 30px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+</style>

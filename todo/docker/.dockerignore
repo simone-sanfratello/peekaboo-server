@@ -1,0 +1,9 @@
+/node_modules
+/coverage
+/cache
+/test
+*.log
+.git*
+.vscode
+.vagrant
+.nyc*
