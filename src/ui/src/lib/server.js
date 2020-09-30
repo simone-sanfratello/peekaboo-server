@@ -1,5 +1,9 @@
+const websocket = window.location.protocol === 'https:'
+  ? 'wss:' : 'ws:'
+
 const server = {
-  host: 'https://illimity.localhost',
-  realtime: 'wss://illimity.localhost/realtime'
+  host: `${window.location.protocol}//${window.location.hostname}`,
+  realtime: `${websocket}//${window.location.hostname}/realtime`
 }
+
 module.exports = server
