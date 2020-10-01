@@ -11,11 +11,13 @@ module.exports = function (settings) {
   settings.log.level = 'info'
   settings.log.pretty = true
 
-  settings.server.port = 443
+  settings.server.port = 8080
+  /*
   settings.server.https = {
     key: fs.readFileSync(path.join(__dirname, '../cert/myapp.localhost-key.pem')),
     cert: fs.readFileSync(path.join(__dirname, '../cert/myapp.localhost.pem'))
   }
+  */
 
   settings.relay.response.rewrite = (request, response) => {
     response.headers = http.adjustResponseCookies(request, response, { fixChars: true, replaceDomain: '.' + settings.hostname })

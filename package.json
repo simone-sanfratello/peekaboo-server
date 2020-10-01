@@ -1,6 +1,6 @@
 {
   "name": "peekaboo-server",
-  "version": "0.0.8-dev",
+  "version": "0.0.9-dev",
   "description": "Reverse proxy for test doubles",
   "engines": {
     "node": ">=12"
