@@ -23,10 +23,10 @@ module.exports = function (settings) {
     */
   }
 
-  settings.request = {
-    // purpose: fix if content-length is provided but body size is less than content-length
-    // wait 500 ms from last received pack, then go on
-    idle: 500
+  settings.timeout = {
+    // fix: if content-length is provided but body size is less than content-length
+    // wait 500 ms then go on
+    request: 500
   }
 
   settings.cors = {
