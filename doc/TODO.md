@@ -1,7 +1,3 @@
-# Bug
-
-curl 'https://illimity.localhost/url/https://login-uat-api.illimity.com/ctkip/services/CtkipService' -X POST -H 'x-ma-pid: 4a7300bd3f23535483b4becaeb010adc' -H 'x-ma-bid: cf047fad04fe91646fd3c9ac7248021c' -H 'accept: */*' -H 'soapaction: processClientMessage' -H 'x-ma-sid: d1c0f25bc981ff4fa6d8245bd8d46123' -H 'accept-encoding: gzip, deflate, br' -H 'x-ma-hostname: uat-retail.illimity.com' -H 'accept-language: en-us' -H 'cache-control: no-cache' -H 'content-length: 1554' -H 'user-agent: wsdl2objc' -H 'connection: keep-alive' -H 'content-type: text/xml; charset=utf-8' -H 'cookie: incap_ses_476_2062663=rJz0b6EDOAkYHVugrRebBmKVdF8AAAAAIEqCA9jNBYEuLP2a/U5jrA==; incap_ses_476_2053670=FxDtXu/CVwU/HFugrRebBmGVdF8AAAAAyJm7Yq5Lwe+rPAEcfn8mJQ==; icib=cf047fad04fe91646fd3c9ac7248021c; TS01319900=01dca142f8c8b905e53c8d0e5cbac9c289db63c6361defefd066de74e7110e461801bce7f8fa19d263ec75ebd1984bc9483c15f603; lb_cookie=rd9o00000000000000000000ffff0a0a08c9o8443; incap_ses_476_2052273=0fg3DTdo9xSmgFqgrRebBoOUdF8AAAAAAzi0fXIzTwDEgP+XSotOgw==; nlbi_2052273=CwXdLlkf9WIstBcxY3M5RwAAAADprUTs1xdHQs9XqQS/772p; nlbi_2053670=ovsQckO522Fy0Gfpm5F2PAAAAADZ0X1xxUWRoZagU2wehDaW; nlbi_2062663=eViIeY8Adgw4/UeiKQcVLQAAAADSY936G7yHge/jjnXX7yrM; visid_incap_2052273=1WCnSgcuQWe7zH/g04VmfRjocl8AAAAAQUIPAAAAAADlylwHnuZ+zkJRzvB48bLB; visid_incap_2053670=W9gSfc9NRBSDqVL9zbAptWDncl8AAAAAQUIPAAAAAAAiGrH5XRIL/yyE4CaFh7ld; visid_incap_2062663=TrNa0YChTKOWAcLh+eWF+V/ncl8AAAAAQUIPAAAAAADJT11G2NuZhbhfOEGAEFRU' --compressed
-
 # TODO
 
 - doc
