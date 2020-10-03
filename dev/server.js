@@ -20,10 +20,12 @@ async function main () {
 
 process
   .on('unhandledRejection', (error, promise) => {
-    log.error({ message: 'unhandledRejection', error, promise })
+    const f = log.error || console.error
+    f({ message: 'unhandledRejection', error, promise })
   })
   .on('uncaughtException', (error) => {
-    log.error({ message: 'uncaughtException', error })
+    const f = log.error || console.error
+    f({ message: 'uncaughtException', error })
   })
 
 main()

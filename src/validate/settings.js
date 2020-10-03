@@ -14,6 +14,9 @@ const settings = s({
   }),
   hostname: 'string',
   server: 'object',
+  timeout: s({
+    request: 'number'
+  }),
   cors: 'object',
   ws: 'object',
   history: s({ path: 'string' }),

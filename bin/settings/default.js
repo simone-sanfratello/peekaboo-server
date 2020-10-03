@@ -14,13 +14,19 @@ module.exports = function (settings) {
   // @see https://www.fastify.io/docs/latest/Server/
   settings.server = {
     port: 8080,
-    host: '0.0.0.0'
+    host: '0.0.0.0',
     /*
     https: {
       key: fs.readFileSync(path.join(__dirname, '../../cert/key.pem')),
       cert: fs.readFileSync(path.join(__dirname, '../../cert/cert.pem'))
     }
     */
+  }
+
+  settings.timeout = {
+    // fix: if content-length is provided but body size is less than content-length
+    // wait 500 ms then go on
+    request: 500
   }
 
   settings.cors = {
