@@ -39,7 +39,7 @@
 
 - [ ] ui one call for fetch request and response
 - [ ] trim cookies chars https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie in lib/http/adjustCookies
-- [x] ui paginate history
+- [ ] ui paginate history
 - [ ] settings.timeout.idle for managed content-type (application/json ...) ?
 - [ ] server api validation
 

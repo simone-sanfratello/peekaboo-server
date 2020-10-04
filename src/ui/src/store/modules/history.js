@@ -86,6 +86,7 @@ const mutations = {
     }
     if (entries.value.length < entries.size) {
       state.entries.done = true
+      return
     }
     state.entries.value = [...state.entries.value, ...entries.value.map(e => ({ summary: e }))]
   },
@@ -105,9 +106,7 @@ const mutations = {
       state.entries.value[i] = entry.value
     } else {
       state.entries.value.unshift(entry.value)
-      if (state.entries.value.length > PAGE_SIZE) {
-        state.entries.value.pop()
-      }
+      state.entries.value.pop()
       state.entries.done = false
     }
   },
