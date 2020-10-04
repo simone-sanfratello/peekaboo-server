@@ -7,7 +7,7 @@ const default_ = require('../bin/settings/default')
 
 module.exports = function (settings) {
   default_(settings)
-  settings.hostname = 'myapp.localhost'
+  settings.hostname = 'localhost'
   settings.log.level = 'info'
   settings.log.pretty = true
 

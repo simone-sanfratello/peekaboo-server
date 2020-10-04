@@ -72,11 +72,11 @@
         </v-row>
       </v-container>
     </v-content>
+    <!--
     <v-footer color="indigo" app>
-      <!--
         <span class="white--text">@todo link to github repo</span>
-      -->
     </v-footer>
+    -->
   </v-app>
 </template>
 
@@ -105,6 +105,15 @@ export default {
   created: function () {
     this.$store.dispatch("history/connect");
   },
+
+  mounted: function() {
+    window.onscroll = () => {
+      const bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
+      if (bottomOfWindow) {
+        this.$store.dispatch("history/list");
+      }
+    };    
+  }
 };
 </script>
 

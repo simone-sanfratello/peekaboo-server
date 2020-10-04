@@ -82,7 +82,6 @@ const relay = function (fastify, settings) {
   })
 
   fastify.addHook('onRequest', async (request, response) => {
-    console.log('RELAY onRequest hook')
     if (request.raw.url.indexOf('/url/') !== 0) {
       return
     }

@@ -5,11 +5,15 @@ const server = require('../../lib/server')
 
 let socket
 
+// @todo settings
+const PAGE_SIZE = 25
+
 const state = () => ({
   connection: 'disconnected',
   entries: {
     status: store.status.LOADING,
-    value: []
+    value: [],
+    done: false
   }
 })
 
@@ -36,12 +40,19 @@ const actions = {
     socket = new window.WebSocket(server.realtime)
   },
   // sendMessage() { socket.send() }
-  list ({ commit }) {
+  list ({ commit, state }) {
+    if (state.entries.done) {
+      console.log('done')
+      return
+    }
     commit('list', { status: store.status.LOADING, value: null })
 
-    window.fetch(`${server.host}/history`, { method: 'GET' })
+    const page = state.entries.value.length
+      ? Math.floor(state.entries.value.length / PAGE_SIZE) + 1
+      : 1
+    window.fetch(`${server.host}/history?page=${page}&size=${PAGE_SIZE}`, { method: 'GET' })
       .then(response => response.json())
-      .then(data => commit('list', { status: store.status.SUCCESS, value: data }))
+      .then(data => commit('list', { status: store.status.SUCCESS, value: data, page, size: PAGE_SIZE }))
       .catch(error => commit('list', { status: store.status.FAIL, value: null, error }))
   },
   get ({ commit }, id) {
@@ -73,8 +84,18 @@ const mutations = {
     if (entries.status !== store.status.SUCCESS) {
       return
     }
-    state.entries.value = entries.value.map(e => ({ summary: e }))
+    if (entries.value.length < entries.size) {
+      state.entries.done = true
+      return
+    }
+    state.entries.value = [...state.entries.value, ...entries.value.map(e => ({ summary: e }))]
   },
+  /**
+   * set entry full data
+   * if entry is new, pop the last one
+   * @param {*} state
+   * @param {*} entry
+   */
   set (state, entry) {
     if (entry.status !== store.status.SUCCESS) {
       return
@@ -85,6 +106,8 @@ const mutations = {
       state.entries.value[i] = entry.value
     } else {
       state.entries.value.unshift(entry.value)
+      state.entries.value.pop()
+      state.entries.done = false
     }
   },
   clear (state, entries) {

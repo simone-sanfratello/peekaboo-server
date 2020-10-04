@@ -1,5 +1,6 @@
 'use strict'
 
+const querystring = require('querystring')
 const path = require('path')
 const fs = require('fs').promises
 const log = require('peppino')
@@ -12,9 +13,10 @@ const history = function (fastify, settings) {
   fs.mkdir(settings.history.path, { recursive: true })
 
   fastify.get('/history', async (request, response) => {
+    const query = querystring.decode(request.query)
     let _current
     try {
-      const _entries = []
+      let _entries = []
       const _files = await fs.readdir(settings.history.path)
       _files.sort((a, b) => a > b ? -1 : 1)
       for (let i = 0; i < _files.length; i++) {
@@ -31,6 +33,13 @@ const history = function (fastify, settings) {
         } catch (error) {
           log.error({ error, file: _current })
         }
+      }
+      if (query.page && query.size) {
+        const page = Math.max(1, parseInt(query.page))
+        const size = Math.min(25, Math.max(10, parseInt(query.size)))
+        const start = (page - 1) * size
+        const end = start + size
+        _entries = _entries.slice(start, end)
       }
       response.code(200).send(_entries)
     } catch (error) {
