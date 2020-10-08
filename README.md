@@ -7,7 +7,9 @@ Batteries included.
 
 # WORK IN PROGRESS
 
-@todo screenshot
+![main](./doc/img/main.png)
+
+![edit](./doc/img/edit.png)
 
 ## Quick start
 
