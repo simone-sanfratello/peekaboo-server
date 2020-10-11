@@ -19,7 +19,7 @@ peekaboo-server
 ```
 
 ```bash
-curl @todo request first time 
+curl @todo request first time
 curl @todo request with cache
 ```
 
