@@ -54,7 +54,7 @@
     "fastify": "^3.5.1",
     "fastify-cors": "^4.1.0",
     "fastify-formbody": "^5.0.0",
-    "fastify-peekaboo": "^2.2.1",
+    "fastify-peekaboo": "^2.2.0",
     "fastify-websocket": "^2.0.10",
     "got": "^11.7.0",
     "mime": "^2.4.6",
