@@ -22,7 +22,7 @@
         </v-toolbar>
       </template>
 
-      <v-progress-circular v-if="history.status === 'loading'" indeterminate color="primary"></v-progress-circular>
+      <v-progress-circular v-if="history.status === store.status.loading" indeterminate color="primary"></v-progress-circular>
       <v-expansion-panels v-for="entry of history.value" :key="entry.summary.id" class="mb-2">
         <v-expansion-panel>
           <v-expansion-panel-header>
@@ -68,6 +68,7 @@
         </v-expansion-panel>
       </v-expansion-panels>
     </v-data-iterator>
+    <div v-if="history.done">history is loaded</div>
   </div>
 </template>
 
@@ -81,6 +82,7 @@ import HttpUrl from "../atoms/HttpUrl";
 import HttpRequest from "../molecules/HttpRequest";
 import HttpResponse from "../molecules/HttpResponse";
 import Cache from "../organisms/Cache";
+import store from "../../lib/store"
 
 export default {
   components: {
@@ -95,12 +97,14 @@ export default {
   },
 
   data: () => ({
+    store,
     filter: ""
   }),
 
   computed: mapState({
     history: function(state) {
       return {
+        done: state.history.entries.done,
         status: state.history.entries.status,
         value: state.history.entries.value.filter(
           entry => entry.summary.url.indexOf(this.filter) != -1

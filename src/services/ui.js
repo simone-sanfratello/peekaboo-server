@@ -8,7 +8,7 @@ const path = require('path')
  * @param {Fastify} - fastify instance
  */
 const main = function (fastify) {
-  fastify.get('/ui*', (request, response) => {
+  const handler = (request, response) => {
     const file = path.join(__dirname, '../../bin/ui', request.params['*'] || 'index.html')
     fs.stat(file, (err, stat) => {
       if (err || !stat.isFile()) {
@@ -26,7 +26,10 @@ const main = function (fastify) {
         .header('Content-Length', stat.size)
       response.send(stream)
     })
-  })
+  }
+
+  fastify.get('/ui*', handler)
+  fastify.get('/*\\.(js|css|woff2)$', handler)
 }
 
 module.exports = main

@@ -7,6 +7,7 @@ const settings = {}
 
 settings.load = [
   path.join(__dirname, '../src/plugins/form-urlencoded'),
+  path.join(__dirname, '../src/plugins/all-content-type'),
   path.join(__dirname, '../src/plugins/cors'),
   path.join(__dirname, '../src/plugins/ws'),
 

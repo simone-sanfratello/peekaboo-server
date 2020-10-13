@@ -7,7 +7,9 @@ Batteries included.
 
 # WORK IN PROGRESS
 
-@todo screenshot
+![main](./doc/img/main.png)
+
+![edit](./doc/img/edit.png)
 
 ## Quick start
 
@@ -17,7 +19,7 @@ peekaboo-server
 ```
 
 ```bash
-curl @todo request first time 
+curl @todo request first time
 curl @todo request with cache
 ```
 

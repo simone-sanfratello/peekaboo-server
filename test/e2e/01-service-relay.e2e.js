@@ -2,6 +2,10 @@
 
 const { request, server } = require('../helper')
 
+// TODO sent invalid content length and/or content type but still forward request
+// curl http://localhost:8080/url/https://braceslab.com -X POST -H "content-length: 100" -H "content-type: aaa" --data "ciao"
+// content-type: json
+
 describe('relay service', () => {
   beforeAll(async () => {
     await server.setup()

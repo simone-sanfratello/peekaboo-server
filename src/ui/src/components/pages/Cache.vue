@@ -21,7 +21,7 @@
         </v-toolbar>
       </template>
 
-      <v-progress-circular v-if="cache.status === 'loading'" indeterminate color="primary"></v-progress-circular>
+      <v-progress-circular v-if="cache.status === store.status.loading" indeterminate color="primary"></v-progress-circular>
       <v-expansion-panels v-for="entry of cache.value" :key="entry.hash" class="mb-2">
         <v-expansion-panel>
           <v-expansion-panel-header>
@@ -52,6 +52,7 @@ import HttpMethod from "../atoms/HttpMethod";
 import HttpUrl from "../atoms/HttpUrl";
 import HttpRequest from "../molecules/HttpRequest";
 import Cache from "../organisms/Cache";
+import store from "../../lib/store"
 
 export default {
   components: {
@@ -62,6 +63,7 @@ export default {
   },
 
   data: () => ({
+    store,
     filter: ""
   }),
 

@@ -51,6 +51,8 @@ const relay = function (fastify, settings) {
           forward.json = request.body
         } else if (request.headers['content-type'].includes('application/x-www-form-urlencoded')) {
           forward.form = request.body
+        } else {
+          forward.body = request.body
         }
       }
 
