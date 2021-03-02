@@ -3,6 +3,8 @@
 </template>
 
 <script>
+import format from "../../lib/format";
+
 export default {
   props: {
     url: String,
@@ -13,7 +15,7 @@ export default {
     format(url, query) {
       let _format = url;
       if (query) {
-        _format += "?" + query;
+        _format += "?" + format.querystring(query)
       }
       return _format;
     }

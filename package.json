@@ -1,6 +1,6 @@
 {
   "name": "peekaboo-server",
-  "version": "0.0.10-dev",
+  "version": "0.0.11-dev",
   "description": "Reverse proxy for test doubles",
   "license": "MIT",
   "author": "Simone Sanfratello <simone@braceslab.com>",
@@ -54,7 +54,7 @@
     "fastify": "^3.12.0",
     "fastify-cors": "^5.2.0",
     "fastify-formbody": "^5.0.0",
-    "fastify-peekaboo": "^2.2.1",
+    "fastify-peekaboo": "^2.3.1",
     "fastify-websocket": "^3.0.0",
     "got": "^11.8.1",
     "mime": "^2.5.2",

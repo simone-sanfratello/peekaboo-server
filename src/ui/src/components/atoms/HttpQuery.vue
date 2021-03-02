@@ -3,26 +3,15 @@
 </template>
 
 <script>
+import format from "../../lib/format";
+
 export default {
   props: {
-    query: String
+    query: Object
   },
 
   methods: {
-    format(query) {
-      return query || ''
-      /*
-      if(!query) {
-        return {}
-      }
-      const _query = {}
-      query.split('&').forEach(q => {
-        const [key, value] = q.split('=')
-        _query[key] = value
-      })
-      return _query
-      */
-    }
+    format: format.querystring
   }
 };
 </script>

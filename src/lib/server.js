@@ -36,8 +36,6 @@ const server = function (settings) {
     try {
       _fastify = fastify({
         ...settings.server,
-        // no need to parse query
-        querystringParser: q => q,
         logger: log.pino(),
         genReqId: () => Date.now().toString()
       })

@@ -10,6 +10,9 @@ const format = {
   // @todo
   toJs: function (str) {
     return str
+  },
+  querystring: function (query) {
+    return new URLSearchParams(query).toString()
   }
 }
 

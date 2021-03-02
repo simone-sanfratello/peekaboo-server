@@ -32,7 +32,7 @@
                 </div>
                 <div class="ml-5" v-if="entry.request.query">
                   <div class="subtitle-2">Query</div>
-                  <div class="ml-5">{{entry.request.query}}</div>
+                  <div class="ml-5">{{formatQueryString(entry.request.query)}}</div>
                 </div>
                 <div class="ml-5" v-if="entry.request.body">
                   <div class="subtitle-2">Body</div>
@@ -117,7 +117,8 @@ export default {
     remove: function() {
       this.$store.dispatch("cache/remove", this.hash);
       this.entry = null
-    }
+    },
+    formatQueryString: format.querystring
   },
 
   created: function() {
