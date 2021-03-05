@@ -6,7 +6,7 @@
       <v-expansion-panel-content>
         <v-card class="yellow lighten-1" outlined>
           <p class="subtitle-1">
-            {{ request.method }} {{ request.url }}
+            {{ request.method }} {{ formatUrl(request.url) }}
             <v-btn absolute right small @click="() => clipboardCurl()">copy as cURL</v-btn>
             <input :id="'curl-'+id" :value="curl" class="curl-helper" />
           </p>
@@ -43,6 +43,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+import format from "../../lib/format";
 import HttpBody from "../atoms/HttpBody";
 import HttpQuery from "../atoms/HttpQuery";
 import HttpHeaders from "../atoms/HttpHeaders";
@@ -87,6 +88,7 @@ export default {
   },
 
   methods: {
+    formatUrl: format.url,
     clipboardCurl: function() {
       const text = document.getElementById("curl-" + this.id);
       text.select();

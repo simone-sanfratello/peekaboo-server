@@ -1,31 +1,26 @@
 'use strict'
 
-const superstruct = require('superstruct')
+const { assert, object, array, string, enums, boolean, number, optional, func } = require('superstruct')
 
-const s = superstruct.struct
-
-const settings = s({
-  version: 'string',
-  load: ['string'],
-  log: s({
-    level: s.enum(['debug', 'trace', 'info', 'warn', 'error', 'fatal']),
-    pretty: 'boolean',
-    version: 'string'
+const settings = object({
+  version: string(),
+  load: array(string()),
+  log: object({
+    level: enums(['debug', 'trace', 'info', 'warn', 'error', 'fatal']),
+    pretty: boolean(),
+    version: string()
   }),
-  hostname: 'string',
-  server: 'object',
-  request: s({
-    idle: 'number'
+  hostname: string(),
+  server: object(),
+  cors: object(),
+  ws: object(),
+  history: object({ path: string() }),
+  relay: object({
+    timeout: number(),
+    response: optional(object({ rewrite: optional(func()) })),
+    request: optional(object({ rewrite: optional(func()) }))
   }),
-  cors: 'object',
-  ws: 'object',
-  history: s({ path: 'string' }),
-  relay: s({
-    timeout: 'number',
-    response: s.optional(s({ rewrite: 'function?' })),
-    request: s.optional(s({ rewrite: 'function?' }))
-  }),
-  cache: 'object'
+  cache: object()
 })
 
-module.exports = settings
+module.exports = (data) => assert(data, settings)

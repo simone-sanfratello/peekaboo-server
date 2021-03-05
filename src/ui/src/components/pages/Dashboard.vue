@@ -68,7 +68,7 @@
         </v-expansion-panel>
       </v-expansion-panels>
     </v-data-iterator>
-    <div v-if="history.done">history is loaded</div>
+    <div v-if="history.done">history loaded</div>
   </div>
 </template>
 

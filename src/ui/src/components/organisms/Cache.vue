@@ -23,7 +23,7 @@
             <div v-if="entry.request" class="mt-5 request">
               <span class="subtitle-1">Request</span>
               <div class="body-2">
-                {{entry.request.method}} {{entry.request.route}}
+                {{entry.request.method}} {{formatUrl(entry.request.route)}}
                 <div class="ml-5" v-if="entry.request.headers">
                   <div class="subtitle-2">Headers</div>
                   <div class="ml-5 box">
@@ -32,7 +32,7 @@
                 </div>
                 <div class="ml-5" v-if="entry.request.query">
                   <div class="subtitle-2">Query</div>
-                  <div class="ml-5">{{entry.request.query}}</div>
+                  <div class="ml-5">{{formatQueryString(entry.request.query)}}</div>
                 </div>
                 <div class="ml-5" v-if="entry.request.body">
                   <div class="subtitle-2">Body</div>
@@ -99,7 +99,6 @@ export default {
   },
 
   methods: {
-    ...format,
     toggleEditable: function() {
       this.editable = !this.editable;
     },
@@ -111,13 +110,15 @@ export default {
       this.editable = false;
     },
     cancel: function() {
-      this.response = format.toJson(this.entry.response);
       this.editable = false;
     },
     remove: function() {
       this.$store.dispatch("cache/remove", this.hash);
       this.entry = null
-    }
+    },
+    formatQueryString: format.querystring,
+    formatUrl: format.url,
+    ...format
   },
 
   created: function() {
@@ -127,7 +128,7 @@ export default {
       (new_, old) => {
         this.entry = new_.value;
         this.status = new_.status;
-        if (!this.entry) {
+        if (!this.entry?.response) {
           this.response = null;
           return;
         }
