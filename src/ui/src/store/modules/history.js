@@ -42,7 +42,6 @@ const actions = {
   // sendMessage() { socket.send() }
   list ({ commit, state }) {
     if (state.entries.done) {
-      console.log('done')
       return
     }
     commit('list', { status: store.status.LOADING, value: null })

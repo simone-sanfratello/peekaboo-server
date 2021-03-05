@@ -13,7 +13,7 @@ export default {
 
   methods: {
     format(url, query) {
-      let _format = url;
+      let _format = format.url(url);
       if (query) {
         _format += "?" + format.querystring(query)
       }

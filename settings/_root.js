@@ -3,7 +3,9 @@
 const path = require('path')
 const package_ = require('../package.json')
 
-const settings = {}
+const settings = {
+  server: { timeout: 250 }
+}
 
 settings.load = [
   path.join(__dirname, '../src/plugins/form-urlencoded'),

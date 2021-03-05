@@ -12,9 +12,6 @@ const settings = object({
   }),
   hostname: string(),
   server: object(),
-  request: object({
-    idle: number()
-  }),
   cors: object(),
   ws: object(),
   history: object({ path: string() }),
