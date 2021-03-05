@@ -1,6 +1,6 @@
 {
   "name": "peekaboo-server",
-  "version": "0.0.12-dev",
+  "version": "0.0.13-dev",
   "description": "Reverse proxy for test doubles",
   "license": "MIT",
   "author": "Simone Sanfratello <simone@braceslab.com>",
