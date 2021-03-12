@@ -32,7 +32,7 @@ const relay = function (fastify, settings) {
         headers: http.adjustRequestHeaders(request.headers)
       }
       if (request.query) {
-        forward.searchParams = request.query
+        forward.query = request.query
       }
 
       if (settings.relay.request.rewrite) {
@@ -54,6 +54,10 @@ const relay = function (fastify, settings) {
         } else {
           forward.body = request.body
         }
+      }
+
+      if (forward.query) {
+        forward.searchParams = new URLSearchParams(forward.query)
       }
 
       const target = await got(forward)
