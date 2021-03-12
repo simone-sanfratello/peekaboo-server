@@ -16,7 +16,8 @@ const event = require('../lib/event')
 const relay = function (fastify, settings) {
   const options = {
     throwHttpErrors: false,
-    timeout: settings.relay.timeout
+    timeout: settings.relay.timeout,
+    followRedirect: false,
   }
 
   fastify.decorateRequest('relay')
